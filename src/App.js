@@ -1,6 +1,5 @@
-import { Route, Routes, Navigate } from "react-router";
+import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import useAuth from './hooks/useAuth'; // assuming you have created this hook to handle Firebase Auth
 import AddEmployee from "./components/containers/AddEmployee";
 import Dashboard from "./components/containers/Dashboard";
 import EditEmployee from "./components/containers/EditEmployee";
