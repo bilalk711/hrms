@@ -1,0 +1,38 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Set up Node.js and install dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Change to your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install  # Or use `yarn install` if you prefer yarn
+
+      # Build the React app
+      - name: Build React App
+        run: npm run build  # Or `yarn build`
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4  # Use a GitHub Pages deployment action suitable for React apps
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Replace with your GitHub token or use secrets
+          BRANCH: gh-pages  # Or the branch you are deploying to
+          FOLDER: build  # Or the build output folder where `npm run build` or `yarn build` places the build artifacts
